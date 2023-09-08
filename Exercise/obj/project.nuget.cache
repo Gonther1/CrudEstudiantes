@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3KOcXUseRSAkiPCNcXfnPBc9k84tqSitP2vmOSQ5xRJUrOHcmL0GfwLWtBxUWUpWo5T5Ku9oZ2M5TqhvmPS3ag==",
+  "dgSpecHash": "a3wAB2TfrsfVKTBOfK3MiPdWMFf71c2z+N1v7b3oIEtlypObNTvXX0D18BR9ZXRKYFF2cfLVklbxOJAwsmn2+A==",
   "success": true,
-  "projectFilePath": "c:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj",
+  "projectFilePath": "/workspaces/CrudEstudiantes/Exercise/Exercise.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

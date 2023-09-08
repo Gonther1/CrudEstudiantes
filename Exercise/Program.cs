@@ -6,6 +6,7 @@ internal class Program
     {
         List<Estudiante> studentsList = new List<Estudiante>();
         int menu=0;
+        double notes;
         do {
             Console.Clear();
             Console.WriteLine("Ingrese una opcion");
@@ -15,20 +16,27 @@ internal class Program
             switch (menu) {
                 case 1:
                     Estudiante estudents = new Estudiante();
-                    estudents.Code = 1;
-                    estudents.Nombre = "Andres";
-                    estudents.Email = "luisandres";
-                    estudents.Edad = 17;
-                    estudents.Direccion = "hola";
-                    studentsList.Add(estudents);
-                    // estudents.Trabajos.Add(1.7);
-                    // estudents.Parciales.Add(4.5);
+                    estudents.Code = int.Parse(Console.ReadLine());
+
+                    // estudents.Nombre = "Andres";
+                    // estudents.Email = "luisandres";
+                    // estudents.Edad = 17;
+                    // estudents.Direccion = "hola";
+                    Console.WriteLine("Ingrese la nota del trabajo");
+                    notes=double.Parse(Console.ReadLine());
+                    estudents.Trabajos.Add(notes);
+                    Console.WriteLine("Ingrese la nota del parcial");
+                    notes=double.Parse(Console.ReadLine());
+                    estudents.Parciales.Add(notes);
                     // estudents.Quices.Add(1.5);
                     // estudents.Quices.Add(2.5);
                     // estudents.Quices.Add(3.5);
-                    // studentsList.Add(estudents);
-                    // Console.WriteLine("Hello World");
-                    // Console.ReadLine(); 
+                    studentsList.Add(estudents);
+                    Console.Clear();
+                    Console.WriteLine(estudents.Trabajos[0]);
+                    Console.WriteLine(estudents.Parciales[0]);
+                    // Console.WriteLine(estudents.Quices[2]);
+                    Console.ReadLine(); 
                 break;
                 case 2:
                 break;

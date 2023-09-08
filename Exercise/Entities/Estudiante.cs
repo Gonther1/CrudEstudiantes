@@ -7,9 +7,9 @@ namespace Exercise.Entities
         private string email;
         private int edad;
         private string direccion;
-        // private List<double> quices;
-        // private List<double> trabajos;
-        // private List<double> parciales;
+        private List<double> quices;
+        private List<double> trabajos;
+        private List<double> parciales;
 
         public int Code
         {
@@ -44,8 +44,7 @@ namespace Exercise.Entities
             set { direccion = value;}
         }
 
-
-/*         public List<double> Quices
+        public List<double> Quices
         {
             get { return quices; }
             set { quices = value; }
@@ -63,22 +62,22 @@ namespace Exercise.Entities
         {
             get { return parciales;}
             set { parciales = value;}
-        } */
+        } 
 
         public Estudiante()
-        {
-            
+        {  
         }
-        public Estudiante(int code, string nombre, string email,int edad, string direccion)
+        
+        public Estudiante(int code, string nombre, string email,int edad, string direccion, List<double> quices, List<double> trabajos, List<double> parciales)
         {
             this.code = code;
             this.nombre = nombre;
             this.email = email;
             this.edad = edad;
             this.direccion = direccion;
-            // this.quices = quices;
-            // this.trabajos = trabajos;
-            // this.parciales = parciales;
+            this.quices = quices;
+            this.trabajos = trabajos;
+            this.parciales = parciales;
         } 
     }
 }
