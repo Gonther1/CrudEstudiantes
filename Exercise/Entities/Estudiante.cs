@@ -2,16 +2,16 @@ namespace Exercise.Entities
 {
     public class Estudiante
     {
-        private int code;
+        private long code;
         private string nombre;
         private string email;
-        private int edad;
+        private long edad;
         private string direccion;
-        private List<double> quices;
-        private List<double> trabajos;
-        private List<double> parciales;
+        private double[]quices = new double[4];
+        private double[]trabajos = new double[2];
+        private double[]parciales = new double[3];
 
-        public int Code
+        public long Code
         {
             get { return code; }
             set { code = value; }
@@ -31,7 +31,7 @@ namespace Exercise.Entities
         }
 
 
-        public int Edad
+        public long Edad
         {
             get { return edad; }
             set { edad = value; }
@@ -44,21 +44,21 @@ namespace Exercise.Entities
             set { direccion = value;}
         }
 
-        public List<double> Quices
+        public double[] Quices
         {
             get { return quices; }
             set { quices = value; }
         }
 
 
-        public List<double> Trabajos
+        public double[] Trabajos
         {
             get { return trabajos;}
             set { trabajos = value;}
         }
 
 
-        public List<double> Parciales
+        public double[] Parciales
         {
             get { return parciales;}
             set { parciales = value;}
@@ -68,7 +68,7 @@ namespace Exercise.Entities
         {  
         }
         
-        public Estudiante(int code, string nombre, string email,int edad, string direccion, List<double> quices, List<double> trabajos, List<double> parciales)
+        public Estudiante(long code, string nombre, string email,long edad, string direccion, double[]quices, double[]trabajos, double[]parciales)
         {
             this.code = code;
             this.nombre = nombre;
