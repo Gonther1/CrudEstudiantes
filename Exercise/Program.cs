@@ -33,7 +33,16 @@ internal class Program
                 case 2:
                     if (studentsList.Count > 0) 
                     {
-                        entero=ResgisterQuices(studentsList,entero);                        
+                        if (studentsList.Count > entero) 
+                        {
+                            entero=ResgisterQuices(studentsList,entero);
+                        }    
+                        else 
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Ya fueron registrados los quices de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                            Console.ReadLine();
+                        }                    
                     } 
                     else 
                     {
@@ -47,6 +56,12 @@ internal class Program
                 case 4:
                     break;
                 case 5:
+                    Console.WriteLine("---Codigo---Nombre---Quices---");
+                    for (byte i = 0; i < studentsList.Count; i++)
+                    {
+                        Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--{studentsList[i].Quices[0]}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]--}");
+                    }
+                    Console.ReadLine();
                     break;
                 case 6:
                     break;
@@ -122,7 +137,7 @@ internal class Program
         dato=Console.ReadLine();
         while (dato.Length > 40 || dato.Length < 1) 
         {
-            Console.WriteLine("Ingrese un nombre valido para el estudiante");
+            Console.WriteLine("Ingrese un correo valido para el estudiante");
             dato=Console.ReadLine();
         }
         estudents.Email=dato;
@@ -151,7 +166,34 @@ internal class Program
 */
         studentsList.Add(estudents);
     }
-    public static ResgisterQuices(List<Estudiante> studentsList, int entero)
+    public static void PrintCodes(List<Estudiante> studentsList)
+    {
+        Console.WriteLine("Codigos disponibles: ");
+        for (byte i = 0; i < studentsList.Count; i++) 
+        {
+            if (studentsList[i].Quices.Count <1) 
+            {
+                Console.Write($"--{studentsList[i].Code}");  
+            }
+        }
+    }
+    public static long CodeRepeat(List<Estudiante> studentsList)
+    {
+        Console.Clear();
+        string datoString;
+        long longNumber;
+        PrintCodes(studentsList);
+        Console.WriteLine("\n\nIngrese el codigo del estudiante");
+        datoString=Console.ReadLine();
+        while ((!long.TryParse(datoString, out longNumber)) || (longNumber<1)) {
+            Console.Clear();
+            PrintCodes(studentsList);
+            Console.WriteLine("\n\nIngrese un codigo exitente: ");
+            datoString=Console.ReadLine();
+        }
+        return longNumber;
+    }
+    public static int ResgisterQuices(List<Estudiante> studentsList, int entero)
     {
         string dato;
         long number;
@@ -162,51 +204,51 @@ internal class Program
         {
             Console.Clear();
             Flag=true;
-            Console.WriteLine("Codigos disponibles: ");
-            for (byte i = 0; i < studentsList.Count; i++) 
+            do 
             {
-                if (studentsList[i].Quices.Count <1) 
+                number=CodeRepeat(studentsList);
+                for (byte i = 0; i < studentsList.Count; i++) 
                 {
-                    Console.Write($"--{studentsList[i].Code}");  
+                    if (number==studentsList[i].Code)
+                    {
+                        if (studentsList[i].Quices.Count <1 )
+                        {
+                            for (byte x=0; x <= 3; x++)
+                            {
+                                Console.WriteLine($"Ingrese la nota del quiz {x+1}: ");
+                                dato=Console.ReadLine();
+                                while ((!double.TryParse(dato, out numDouble)) || (numDouble<1)) {
+                                    Console.Clear();
+                                    Console.WriteLine($"Ingrese una nota valida del quiz {x+1}: ");
+                                    dato=Console.ReadLine();
+                                }
+                                studentsList[i].Quices.Add(numDouble);
+                                
+                            }
+                            NumShort++;
+                            Flag=false;
+                            Console.WriteLine(studentsList[i].Quices.Count);
+                        }
+                        else 
+                        {
+                            Console.WriteLine("Np es posible realizar esta accion");
+                        }
+                    }
                 }
-            }
-            Console.WriteLine("\n\nIngrese el codigo del estudiante");
-            dato=Console.ReadLine();
-            while ((!long.TryParse(dato, out number)) || (number<1)) {
-                Console.Clear();
-                Console.WriteLine("Ingrese un codigo exitente: ");
+            } while (Flag);
+            if (studentsList.Count > NumShort)
+            {
+                Console.WriteLine("¿Quieres añadir las notas de quices de otro estudiante?");
+                Console.WriteLine("Si=1          No=Cualquier tecla");
                 dato=Console.ReadLine();
             }
-            NumShort++;
-            for (byte i = 0; i < studentsList.Count; i++) 
-            {
-                if (number==studentsList[i].Code)
-                {
-                    if (studentsList[i].Quices.Count <1 )
-                    {
-                        for (byte x=0; x <= 3; x++)
-                        {
-                            Console.WriteLine($"Ingrese la nota del quiz {x+1}: ");
-                            dato=Console.ReadLine();
-                            while ((!double.TryParse(dato, out numDouble)) || (numDouble<1)) {
-                                Console.Clear();
-                                Console.WriteLine($"Ingrese una nota valida del quiz {x+1}: ");
-                                dato=Console.ReadLine();
-                            }
-                            studentsList[i].Quices.Add(numDouble);
-                            
-                        }
-                        Console.WriteLine(studentsList[i].Quices.Count);
-                    }
-                    else 
-                    {
-                        Console.WriteLine("Np es posible realizar esta accion");
-                    }
-                }
+            else 
+            {   
+                Console.Clear();
+                Console.WriteLine("No quedan más estudiantes por registrar los quices\n\nPresione enter para continuar");
+                Console.ReadLine();
+                dato="0";
             }
-            Console.WriteLine("¿Quieres añadir las notas de quices de otro estudiante?");
-            Console.WriteLine("Si=1          No=Cualquier tecla");
-            dato=Console.ReadLine();
         } while (dato=="1");
         return NumShort;
     }   
