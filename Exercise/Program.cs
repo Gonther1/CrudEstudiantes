@@ -8,6 +8,7 @@ internal class Program
         List<Estudiante> studentsList = new List<Estudiante>();
         byte menu=0;
         string AddStudents;
+        int entero=0;
         // double notes;
         do {
             Console.Clear();
@@ -16,26 +17,23 @@ internal class Program
             Console.WriteLine("2-Registrar Quices");
             Console.WriteLine("3-Registrar Parciales");
             Console.WriteLine("4-Registrar Trabajos");
-            Console.WriteLine("5-Salir");
+            Console.WriteLine("5-Notas Generales");
+            Console.WriteLine("6-Notas Finales");
+            Console.WriteLine("7-Salir");
             menu=byte.Parse(Console.ReadLine());
             switch (menu) {
                 case 1:
                     do {
                         RegisterStudents(studentsList);
                         Console.WriteLine("¿Quieres añadir más estudiantes?");
-                        Console.WriteLine("Si=Cualquier tecla          No=1");
+                        Console.WriteLine("Si=1          No=Cualquier tecla");
                         AddStudents=Console.ReadLine();
-                    } while (AddStudents != "1");
+                    } while (AddStudents == "1");
                 break;
                 case 2:
                     if (studentsList.Count > 0) 
                     {
-                        do {
-                            ResgisterQuices(studentsList);
-                            Console.WriteLine("¿Quieres registrar los quices de otro estudiante?");
-                            Console.WriteLine("Si=Cualquier tecla          No=1");
-                            AddStudents=Console.ReadLine();
-                        } while (AddStudents != "1");
+                        entero=ResgisterQuices(studentsList,entero);                        
                     } 
                     else 
                     {
@@ -43,13 +41,21 @@ internal class Program
                         Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
                         Console.ReadLine();
                     }
-                break;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
                 default:
                     Console.WriteLine(":V");
                     Console.ReadLine(); 
                 break;
             }
-        } while (menu!=5);
+        } while (menu!=7);
     }
     public static void RegisterStudents(List<Estudiante> studentsList)
     {
@@ -145,19 +151,24 @@ internal class Program
 */
         studentsList.Add(estudents);
     }
-    public static void ResgisterQuices(List<Estudiante> studentsList)
+    public static ResgisterQuices(List<Estudiante> studentsList, int entero)
     {
-        Console.Clear();
         string dato;
         long number;
+        double numDouble;
         bool Flag;
-        byte NumShort;
-        do {
-            NumShort=0;
+        int NumShort=entero;
+        do 
+        {
+            Console.Clear();
+            Flag=true;
             Console.WriteLine("Codigos disponibles: ");
-            for (int i = 0; i < studentsList.Count; i++) 
+            for (byte i = 0; i < studentsList.Count; i++) 
             {
-                Console.Write($"--{studentsList[i].Code}");
+                if (studentsList[i].Quices.Count <1) 
+                {
+                    Console.Write($"--{studentsList[i].Code}");  
+                }
             }
             Console.WriteLine("\n\nIngrese el codigo del estudiante");
             dato=Console.ReadLine();
@@ -166,26 +177,37 @@ internal class Program
                 Console.WriteLine("Ingrese un codigo exitente: ");
                 dato=Console.ReadLine();
             }
-            for (int i = 0; i < studentsList.Count; i++) 
+            NumShort++;
+            for (byte i = 0; i < studentsList.Count; i++) 
             {
                 if (number==studentsList[i].Code)
                 {
-                    studentsList[i].Quices.Add(1.5);
-                    studentsList[i].Quices.Add(2.5);
-                    studentsList[i].Quices.Add(3.5);
-                    studentsList[i].Quices.Add(4.5);
-                    Console.WriteLine(studentsList[i].Quices.Count);
-                    Console.ReadLine();
-                    Console.WriteLine(studentsList[i].Quices[0]);
-                    Console.WriteLine(studentsList[i].Quices[1]);
-                    Console.WriteLine(studentsList[i].Quices[2]);
-                    Console.WriteLine(studentsList[i].Quices[3]);
-                    Console.ReadLine();
-                    NumShort=1;
+                    if (studentsList[i].Quices.Count <1 )
+                    {
+                        for (byte x=0; x <= 3; x++)
+                        {
+                            Console.WriteLine($"Ingrese la nota del quiz {x+1}: ");
+                            dato=Console.ReadLine();
+                            while ((!double.TryParse(dato, out numDouble)) || (numDouble<1)) {
+                                Console.Clear();
+                                Console.WriteLine($"Ingrese una nota valida del quiz {x+1}: ");
+                                dato=Console.ReadLine();
+                            }
+                            studentsList[i].Quices.Add(numDouble);
+                            
+                        }
+                        Console.WriteLine(studentsList[i].Quices.Count);
+                    }
+                    else 
+                    {
+                        Console.WriteLine("Np es posible realizar esta accion");
+                    }
                 }
             }
-        } while (NumShort<1);
-
-        Console.WriteLine("\n\n");
-    }
+            Console.WriteLine("¿Quieres añadir las notas de quices de otro estudiante?");
+            Console.WriteLine("Si=1          No=Cualquier tecla");
+            dato=Console.ReadLine();
+        } while (dato=="1");
+        return NumShort;
+    }   
 }
