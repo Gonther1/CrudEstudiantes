@@ -193,6 +193,33 @@ internal class Program
         }
         return longNumber;
     }
+    public static void RegisterNotes(List<Estudiante> studentsList,string option, byte cantNotes,byte i)
+    {
+        string dato;
+        double numDouble;
+        for (byte x=0; x <= cantNotes; x++)
+        {
+            Console.WriteLine($"Ingrese la nota del {option} {x+1}: ");
+            dato=Console.ReadLine();
+            while ((!double.TryParse(dato, out numDouble)) || (numDouble<1) || (numDouble>100)) {
+                Console.Clear();
+                Console.WriteLine($"Ingrese una nota valida del {option} {x+1}: ");
+                dato=Console.ReadLine();
+            }
+            switch (option)
+            {
+                case "quiz":
+                    studentsList[i].Quices.Add(numDouble);
+                    break;
+                case "parcial":
+                    studentsList[i].Parciales.Add(numDouble);
+                    break;
+                case "trabajo":
+                    studentsList[i].Trabajos.Add(numDouble);
+                    break;
+            }
+        }
+    }
     public static int ResgisterQuices(List<Estudiante> studentsList, int entero)
     {
         string dato;
@@ -213,18 +240,7 @@ internal class Program
                     {
                         if (studentsList[i].Quices.Count <1 )
                         {
-                            for (byte x=0; x <= 3; x++)
-                            {
-                                Console.WriteLine($"Ingrese la nota del quiz {x+1}: ");
-                                dato=Console.ReadLine();
-                                while ((!double.TryParse(dato, out numDouble)) || (numDouble<1)) {
-                                    Console.Clear();
-                                    Console.WriteLine($"Ingrese una nota valida del quiz {x+1}: ");
-                                    dato=Console.ReadLine();
-                                }
-                                studentsList[i].Quices.Add(numDouble);
-                                
-                            }
+                            RegisterNotes(studentsList,"quiz",3,i);
                             NumShort++;
                             Flag=false;
                             Console.WriteLine(studentsList[i].Quices.Count);

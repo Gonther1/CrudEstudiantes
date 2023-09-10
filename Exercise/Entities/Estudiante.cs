@@ -8,8 +8,8 @@ namespace Exercise.Entities
         private long edad;
         private string direccion;
         private List<double> quices = new List<double> ();
-        private double[]trabajos = new double[2];
-        private double[]parciales = new double[3];
+        private List<double> trabajos = new List<double> ();
+        private List<double> parciales = new List<double> ();
 
         public long Code
         {
@@ -51,14 +51,14 @@ namespace Exercise.Entities
         }
 
 
-        public double[] Trabajos
+        public List<double> Trabajos
         {
             get { return trabajos;}
             set { trabajos = value;}
         }
 
 
-        public double[] Parciales
+        public List<double> Parciales
         {
             get { return parciales;}
             set { parciales = value;}
@@ -68,7 +68,7 @@ namespace Exercise.Entities
         {  
         }
         
-        public Estudiante(long code, string nombre, string email,long edad, string direccion, List<double> quices, double[]trabajos, double[]parciales)
+        public Estudiante(long code, string nombre, string email,long edad, string direccion, List<double> quices, List<double> trabajos, List<double> parciales)
         {
             this.code = code;
             this.nombre = nombre;
