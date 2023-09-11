@@ -8,7 +8,9 @@ internal class Program
         List<Estudiante> studentsList = new List<Estudiante>();
         byte menu=0;
         string AddStudents;
-        int entero=0;
+        int entero1=0;
+        int entero2=0;
+        int entero3=0;
         // double notes;
         do {
             Console.Clear();
@@ -33,9 +35,9 @@ internal class Program
                 case 2:
                     if (studentsList.Count > 0) 
                     {
-                        if (studentsList.Count > entero) 
+                        if (studentsList.Count > entero1) 
                         {
-                            entero=ResgisterQuices(studentsList,entero);
+                            entero1=RegisterSubjects(studentsList,entero1,"quiz",3);
                         }    
                         else 
                         {
@@ -52,14 +54,53 @@ internal class Program
                     }
                     break;
                 case 3:
+                    if (studentsList.Count > 0) 
+                    {
+                        if (studentsList.Count > entero2) 
+                        {
+                            entero2=RegisterSubjects(studentsList,entero2,"parcial",2);
+                        }    
+                        else 
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Ya fueron registrados los parciales de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                            Console.ReadLine();
+                        }                    
+                    } 
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
+                        Console.ReadLine();
+                    }
                     break;
                 case 4:
+                    if (studentsList.Count > 0) 
+                    {
+                        if (studentsList.Count > entero3) 
+                        {
+                            entero3=RegisterSubjects(studentsList,entero3,"trabajo",1);
+                        }    
+                        else 
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Ya fueron registrados los trabajos de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                            Console.ReadLine();
+                        }                    
+                    } 
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
+                        Console.ReadLine();
+                    }
                     break;
                 case 5:
+                    Console.Clear();
                     Console.WriteLine("---Codigo---Nombre---Quices---");
                     for (byte i = 0; i < studentsList.Count; i++)
                     {
-                        Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--{studentsList[i].Quices[0]}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]--}");
+                        Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--Q--{studentsList[i].Quices[0]}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]}---T---{studentsList[i].Trabajos[0]}--{studentsList[i].Trabajos[1]}---P---{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[1]}");
                     }
                     Console.ReadLine();
                     break;
@@ -72,29 +113,42 @@ internal class Program
             }
         } while (menu!=7);
     }
-    public static string returnString(string texto byte max)
+    public static string returnString(string texto, byte max)
     {   
         Console.Clear();
         string dato;
-        Console.WriteLine($"{texto} del estudiante");
+        Console.WriteLine($"\n\n{texto} del estudiante");
         dato=Console.ReadLine();
         while (dato.Length > max || dato.Length < 1) 
         {
-            Console.WriteLine($"{texto} valido(a) para el estudiante");
+            Console.Clear();
+            Console.WriteLine($"\n\n{texto} valido(a) para el estudiante");
             dato=Console.ReadLine();
         }
         return dato;
     } 
-    public static long returnNumber(string texto, byte max)
+    public static long returnNumber(string texto, byte max, List<Estudiante> studentsList)
     {
         Console.Clear();
         long number;
         string dato;
-        Console.WriteLine($"{texto} del estudiante");
+        if (max==15 && studentsList.Count > 0)
+        {
+            Console.WriteLine("Codigos registrados: ");
+            for (byte i = 0; i < studentsList.Count; i++) 
+            {
+                Console.Write($"--{studentsList[i].Code}");  
+/*                 if (studentsList[i].Quices.Count <1) 
+                {
+                } */
+            }
+        }
+        Console.WriteLine($"\n\n{texto} del estudiante");
         dato=Console.ReadLine();
         while ((!long.TryParse(dato, out number)) || (dato.Length > max) || (number<1))  
         {
-            Console.WriteLine($"{texto} valido(a) para el estudiante");
+            Console.Clear();
+            Console.WriteLine($"\n\n{texto} valido(a) para el estudiante");
             dato=Console.ReadLine();
         }
         return number;
@@ -108,15 +162,7 @@ internal class Program
         byte NumShort;
         Flag=true;
         Estudiante estudents = new Estudiante();
-        if (studentsList.Count > 0) 
-        {
-            Console.WriteLine("Codigos utilizados: ");
-            for (int i = 0; i < studentsList.Count; i++) 
-            {
-                Console.Write($"--{studentsList[i].Code}");
-            }
-        } 
-        number=returnNumber("Codigo",15);
+        number=returnNumber("Codigo",15, studentsList);
         while (Flag) 
         {
             Console.Clear();
@@ -126,17 +172,7 @@ internal class Program
                 if (number==studentsList[i].Code)
                 {   
                     Console.Clear();
-                    Console.WriteLine("Codigos utilizados: ");
-                    for (int x = 0; x < studentsList.Count; x++) 
-                    {
-                        Console.Write($"--{studentsList[x].Code}");
-                    }                    
-                    Console.WriteLine("\n\nIngrese un codigo diferente para el estudiante");
-                    dato=Console.ReadLine();
-                    while ((!long.TryParse(dato, out number)) || (dato.Length > 15) || (number<1)) {
-                        Console.WriteLine("Ingrese un codigo diferente y de 15 caracteres maximo: ");
-                        dato=Console.ReadLine();
-                    }
+                    number=returnNumber("Codigo",15, studentsList);
                     NumShort=1;                                    
                 }
             }
@@ -150,15 +186,9 @@ internal class Program
         estudents.Nombre=dato;
         dato=returnString("Correo",40);
         estudents.Email=dato;
-        number=returnNumber("Edad",3);
+        number=returnNumber("Edad",3, studentsList);
         estudents.Edad=number;
         dato=returnString("Direccion",35);
-        dato=Console.ReadLine();
-        while (dato.Length > 35 || dato.Length < 1) 
-        {
-            Console.WriteLine("Ingrese una direccion valida para el estudiante");
-            dato=Console.ReadLine();
-        }
         estudents.Direccion=dato;
 /*         
         Console.WriteLine(estudents.Code);
@@ -169,28 +199,41 @@ internal class Program
 */
         studentsList.Add(estudents);
     }
-    public static void PrintCodes(List<Estudiante> studentsList)
+    public static void PrintCodes(List<Estudiante> studentsList, string option)
     {
-        Console.WriteLine("Codigos disponibles: ");
+        int type=0;
+        Console.WriteLine("Codigos registrados: ");
         for (byte i = 0; i < studentsList.Count; i++) 
         {
-            if (studentsList[i].Quices.Count <1) 
+            switch (option)
+            {
+                case "quiz":
+                    type=studentsList[i].Quices.Count;
+                    break;
+                case "parcial":
+                    type=studentsList[i].Parciales.Count;
+                    break;
+                case "trabajo":
+                    type=studentsList[i].Trabajos.Count;
+                    break;
+            }
+            if (type <1) 
             {
                 Console.Write($"--{studentsList[i].Code}");  
             }
         }
     }
-    public static long CodeRepeat(List<Estudiante> studentsList)
+    public static long CodeRepeat(List<Estudiante> studentsList, string option)
     {
         Console.Clear();
         string datoString;
         long longNumber;
-        PrintCodes(studentsList);
+        PrintCodes(studentsList, option);
         Console.WriteLine("\n\nIngrese el codigo del estudiante");
         datoString=Console.ReadLine();
         while ((!long.TryParse(datoString, out longNumber)) || (longNumber<1)) {
             Console.Clear();
-            PrintCodes(studentsList);
+            PrintCodes(studentsList,option);
             Console.WriteLine("\n\nIngrese un codigo exitente: ");
             datoString=Console.ReadLine();
         }
@@ -223,30 +266,43 @@ internal class Program
             }
         }
     }
-    public static int ResgisterQuices(List<Estudiante> studentsList, int entero)
+    public static int RegisterSubjects(List<Estudiante> studentsList, int entero, string option, byte range)
     {
         string dato;
         long number;
-        double numDouble;
+        // double numDouble;
         bool Flag;
         int NumShort=entero;
+        int type=0;
         do 
         {
             Console.Clear();
             Flag=true;
             do 
             {
-                number=CodeRepeat(studentsList);
+                number=CodeRepeat(studentsList,option);
                 for (byte i = 0; i < studentsList.Count; i++) 
                 {
                     if (number==studentsList[i].Code)
                     {
-                        if (studentsList[i].Quices.Count <1 )
+                        switch (option)
                         {
-                            RegisterNotes(studentsList,"quiz",3,i);
+                            case "quiz":
+                                type=studentsList[i].Quices.Count;
+                                break;
+                            case "parcial":
+                                type=studentsList[i].Parciales.Count;
+                                break;
+                            case "trabajo":
+                                type=studentsList[i].Trabajos.Count;
+                                break;
+                        }
+                        if (type <1 )
+                        {
+                            RegisterNotes(studentsList,option,range,i);
                             NumShort++;
                             Flag=false;
-                            Console.WriteLine(studentsList[i].Quices.Count);
+                            Console.WriteLine(type);
                         }
                         else 
                         {
@@ -257,14 +313,14 @@ internal class Program
             } while (Flag);
             if (studentsList.Count > NumShort)
             {
-                Console.WriteLine("¿Quieres añadir las notas de quices de otro estudiante?");
+                Console.WriteLine("¿Quieres añadir las notas de otro estudiante?");
                 Console.WriteLine("Si=1          No=Cualquier tecla");
                 dato=Console.ReadLine();
             }
             else 
             {   
                 Console.Clear();
-                Console.WriteLine("No quedan más estudiantes por registrar los quices\n\nPresione enter para continuar");
+                Console.WriteLine("No quedan más estudiantes por registrar en esta area\n\nPresione enter para continuar");
                 Console.ReadLine();
                 dato="0";
             }
