@@ -72,6 +72,33 @@ internal class Program
             }
         } while (menu!=7);
     }
+    public static string returnString(string texto byte max)
+    {   
+        Console.Clear();
+        string dato;
+        Console.WriteLine($"{texto} del estudiante");
+        dato=Console.ReadLine();
+        while (dato.Length > max || dato.Length < 1) 
+        {
+            Console.WriteLine($"{texto} valido(a) para el estudiante");
+            dato=Console.ReadLine();
+        }
+        return dato;
+    } 
+    public static long returnNumber(string texto, byte max)
+    {
+        Console.Clear();
+        long number;
+        string dato;
+        Console.WriteLine($"{texto} del estudiante");
+        dato=Console.ReadLine();
+        while ((!long.TryParse(dato, out number)) || (dato.Length > max) || (number<1))  
+        {
+            Console.WriteLine($"{texto} valido(a) para el estudiante");
+            dato=Console.ReadLine();
+        }
+        return number;
+    } 
     public static void RegisterStudents(List<Estudiante> studentsList)
     {
         Console.Clear();
@@ -89,13 +116,7 @@ internal class Program
                 Console.Write($"--{studentsList[i].Code}");
             }
         } 
-        Console.WriteLine("\n\nIngrese el codigo del estudiante");
-        dato=Console.ReadLine();
-        while ((!long.TryParse(dato, out number)) || (dato.Length > 15) || (number<1)) {
-            Console.Clear();
-            Console.WriteLine("Ingrese un codigo diferente y de 15 caracteres maximo: ");
-            dato=Console.ReadLine();
-        }
+        number=returnNumber("Codigo",15);
         while (Flag) 
         {
             Console.Clear();
@@ -125,31 +146,13 @@ internal class Program
             }
         }
         estudents.Code=number;
-        Console.WriteLine("Ingrese el nombre del estudiante");
-        dato=Console.ReadLine();
-        while (dato.Length > 40 || dato.Length < 1) 
-        {
-            Console.WriteLine("Ingrese un nombre valido para el estudiante");
-            dato=Console.ReadLine();
-        }
+        dato=returnString("Nombre",40);
         estudents.Nombre=dato;
-        Console.WriteLine("Ingrese el correo del estudiante");
-        dato=Console.ReadLine();
-        while (dato.Length > 40 || dato.Length < 1) 
-        {
-            Console.WriteLine("Ingrese un correo valido para el estudiante");
-            dato=Console.ReadLine();
-        }
+        dato=returnString("Correo",40);
         estudents.Email=dato;
-        Console.WriteLine("Ingrese la edad del estudiante");
-        dato=Console.ReadLine();
-        while ((!long.TryParse(dato, out number)) || (dato.Length > 3) || (number<1))  
-        {
-            Console.WriteLine("Ingrese una edad valida para el estudiante");
-            dato=Console.ReadLine();
-        }
+        number=returnNumber("Edad",3);
         estudents.Edad=number;
-        Console.WriteLine("Ingrese la direccion del estudiante");
+        dato=returnString("Direccion",35);
         dato=Console.ReadLine();
         while (dato.Length > 35 || dato.Length < 1) 
         {
