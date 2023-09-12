@@ -1,5 +1,7 @@
 ﻿using System.Security.AccessControl;
 using Exercise.Entities;
+using Newtonsoft.Json;
+
 
 internal class Program
 {
@@ -379,4 +381,20 @@ internal class Program
             Console.Read();
         }
     }
+    public static void SaveData(List<Estudiante> studentsList)
+    {
+        string json = JsonConvert.SerializeObject(studentsList,Formating.Idented);
+        File.WriteAllText('boletin.json',json);
+    }
+    // Para cargar
+    // public static List<Estudiante> LoadData()
+    // {
+    //     using (StreamReader reader = new StreamReader('boletin.json'))
+    //     {
+    //         string json = reader.ReadToEnd();
+    //         return System.Text.Json.JsonSerializer
+    //         .Deserialize<List<Estudiante>>(json, new System.Text.Json.JsonSerializerOptions(){
+    //             PropertyNameCaseInsensitive = true }) ?? new <List<Estudiante>>();
+    //     }
+    // }
 }
