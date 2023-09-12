@@ -11,7 +11,6 @@ internal class Program
         int entero1=0;
         int entero2=0;
         int entero3=0;
-        // double notes;
         do {
             Console.Clear();
             Console.WriteLine("Ingrese una opcion");
@@ -97,19 +96,21 @@ internal class Program
                     break;
                 case 5:
                     Console.Clear();
-                    Console.WriteLine("---Codigo---Nombre---Quices---");
-                    for (byte i = 0; i < studentsList.Count; i++)
-                    {
-                        Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--Q--{studentsList[i].Quices[0]}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]}---T---{studentsList[i].Trabajos[0]}--{studentsList[i].Trabajos[1]}---P---{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[1]}");
-                    }
-                    Console.ReadLine();
+                    printNotes(studentsList,entero1,entero2,entero3);
                     break;
                 case 6:
+                    Console.Clear();
+                    printDefNotes(studentsList,entero1,entero2,entero3);
+                    break;
+                case 7:
+                    Console.Clear();
+                    Console.WriteLine("Adios...");
                     break;
                 default:
-                    Console.WriteLine(":V");
+                    Console.Clear();
+                    Console.WriteLine("Ingrese una opcion valida");
                     Console.ReadLine(); 
-                break;
+                    break;
             }
         } while (menu!=7);
     }
@@ -138,9 +139,6 @@ internal class Program
             for (byte i = 0; i < studentsList.Count; i++) 
             {
                 Console.Write($"--{studentsList[i].Code}");  
-/*                 if (studentsList[i].Quices.Count <1) 
-                {
-                } */
             }
         }
         Console.WriteLine($"\n\n{texto} del estudiante");
@@ -190,13 +188,6 @@ internal class Program
         estudents.Edad=number;
         dato=returnString("Direccion",35);
         estudents.Direccion=dato;
-/*         
-        Console.WriteLine(estudents.Code);
-        Console.WriteLine(estudents.Nombre);
-        Console.WriteLine(estudents.Edad);
-        Console.WriteLine(estudents.Direccion);
-        Console.WriteLine(estudents.Email); 
-*/
         studentsList.Add(estudents);
     }
     public static void PrintCodes(List<Estudiante> studentsList, string option)
@@ -243,6 +234,10 @@ internal class Program
     {
         string dato;
         double numDouble;
+        double contNotes=0;
+        double defNote;
+        double littleDouble;
+        double factor=0;
         for (byte x=0; x <= cantNotes; x++)
         {
             Console.WriteLine($"Ingrese la nota del {option} {x+1}: ");
@@ -252,25 +247,45 @@ internal class Program
                 Console.WriteLine($"Ingrese una nota valida del {option} {x+1}: ");
                 dato=Console.ReadLine();
             }
+            factor=Math.Pow(10,1);
+            littleDouble=Math.Floor(numDouble * factor) / factor;
             switch (option)
             {
                 case "quiz":
-                    studentsList[i].Quices.Add(numDouble);
+                    studentsList[i].Quices.Add(littleDouble);
                     break;
                 case "parcial":
-                    studentsList[i].Parciales.Add(numDouble);
+                    studentsList[i].Parciales.Add(littleDouble);
                     break;
                 case "trabajo":
-                    studentsList[i].Trabajos.Add(numDouble);
+                    studentsList[i].Trabajos.Add(littleDouble);
                     break;
             }
+            contNotes+=littleDouble;
+        }
+        switch (option)
+        {
+            case "quiz":
+                defNote=(contNotes/4)*0.25;
+                littleDouble=Math.Floor(defNote * factor) / factor;
+                studentsList[i].Quices.Add(littleDouble);
+                break;
+            case "parcial":
+                defNote=(contNotes/3)*0.60;
+                littleDouble=Math.Floor(defNote * factor) / factor;
+                studentsList[i].Parciales.Add(littleDouble);
+                break;
+            case "trabajo":
+                defNote=(contNotes/2)*0.15;
+                littleDouble=Math.Floor(defNote * factor) / factor;
+                studentsList[i].Trabajos.Add(littleDouble);
+                break;
         }
     }
     public static int RegisterSubjects(List<Estudiante> studentsList, int entero, string option, byte range)
     {
         string dato;
         long number;
-        // double numDouble;
         bool Flag;
         int NumShort=entero;
         int type=0;
@@ -327,4 +342,41 @@ internal class Program
         } while (dato=="1");
         return NumShort;
     }   
+    public static void printNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
+    {
+        if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
+        {
+            Console.Clear();
+            Console.WriteLine("---Codigo---Nombre---Quices---Trabajos---Parciales---");
+            for (byte i = 0; i < studentsList.Count; i++)
+            {
+                Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--Q--{Math.Round(studentsList[i].Quices[0],1)}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]}---T---{studentsList[i].Trabajos[0]}--{studentsList[i].Trabajos[1]}---P---{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[1]}--{studentsList[i].Parciales[2]}");
+            }
+            
+            Console.ReadLine();
+        }
+        else 
+        {
+            Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
+            Console.Read();
+        }
+    }
+    public static void printDefNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
+    {
+        if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
+        {
+            Console.Clear();
+            Console.WriteLine("---Codigo---Nombre---Definitiva Quices---Definitiva Trabajos---Definitiva Parciales--");
+            for (byte i = 0; i < studentsList.Count; i++)
+            {
+                Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}---{studentsList[i].Quices[4]}---{studentsList[i].Trabajos[2]}---{studentsList[i].Parciales[3]}");
+            }
+            Console.Read();
+        }
+        else 
+        {
+            Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
+            Console.Read();
+        }
+    }
 }
