@@ -1,0 +1,22 @@
+[
+  {
+    "Code": 1,
+    "Nombre": "a",
+    "Email": "a",
+    "Edad": 1,
+    "Direccion": "a",
+    "Quices": [],
+    "Trabajos": [],
+    "Parciales": []
+  },
+  {
+    "Code": 2,
+    "Nombre": "Andres",
+    "Email": "luisandresalvarezsilva@gmail.com",
+    "Edad": 17,
+    "Direccion": "El rocio",
+    "Quices": [],
+    "Trabajos": [],
+    "Parciales": []
+  }
+]

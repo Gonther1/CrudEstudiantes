@@ -27,3 +27,5 @@ C:/Users/APM02-54/Desktop/CrudEstudiantes/Exercise/obj/Debug/net7.0/ref/Exercise
 /workspaces/CrudEstudiantes/Exercise/obj/Debug/net7.0/Exercise.pdb
 /workspaces/CrudEstudiantes/Exercise/obj/Debug/net7.0/Exercise.genruntimeconfig.cache
 /workspaces/CrudEstudiantes/Exercise/obj/Debug/net7.0/ref/Exercise.dll
+/workspaces/CrudEstudiantes/Exercise/bin/Debug/net7.0/Newtonsoft.Json.dll
+/workspaces/CrudEstudiantes/Exercise/obj/Debug/net7.0/Exercise.csproj.CopyComplete

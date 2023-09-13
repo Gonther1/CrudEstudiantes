@@ -191,6 +191,7 @@ internal class Program
         dato=returnString("Direccion",35);
         estudents.Direccion=dato;
         studentsList.Add(estudents);
+        SaveData(studentsList);
     }
     public static void PrintCodes(List<Estudiante> studentsList, string option)
     {
@@ -383,9 +384,10 @@ internal class Program
     }
     public static void SaveData(List<Estudiante> studentsList)
     {
-        string json = JsonConvert.SerializeObject(studentsList,Formating.Idented);
-        File.WriteAllText('boletin.json',json);
+        string json = JsonConvert.SerializeObject(studentsList,Formatting.Indented);
+        File.WriteAllText("boletin.json",json);
     }
+
     // Para cargar
     // public static List<Estudiante> LoadData()
     // {
