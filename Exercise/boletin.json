@@ -5,18 +5,48 @@
     "Email": "a",
     "Edad": 1,
     "Direccion": "a",
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Quices": [
+      50.0,
+      20.0,
+      30.0,
+      40.0,
+      8.7
+    ],
+    "Trabajos": [
+      1.0,
+      7.0,
+      0.6
+    ],
+    "Parciales": [
+      1.0,
+      2.0,
+      3.0,
+      1.2
+    ]
   },
   {
     "Code": 2,
-    "Nombre": "Andres",
-    "Email": "luisandresalvarezsilva@gmail.com",
-    "Edad": 17,
-    "Direccion": "El rocio",
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Nombre": "a",
+    "Email": "a",
+    "Edad": 1,
+    "Direccion": "a",
+    "Quices": [
+      100.0,
+      100.0,
+      1.0,
+      7.0,
+      13.0
+    ],
+    "Trabajos": [
+      1.0,
+      1.0,
+      0.1
+    ],
+    "Parciales": [
+      100.0,
+      100.0,
+      100.0,
+      60.0
+    ]
   }
 ]

@@ -1,13 +1,23 @@
 ﻿using System.Security.AccessControl;
 using Exercise.Entities;
 using Newtonsoft.Json;
-
+using System.IO;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         List<Estudiante> studentsList = new List<Estudiante>();
+        if (File.Exists("boletin.json"))
+        {
+            studentsList = LoadData();
+        }
+        else 
+        {
+            Console.WriteLine("El archivo no esta creado y creo uno nuevo");
+            Console.ReadLine();
+            SaveData(studentsList);
+        }
         byte menu=0;
         string AddStudents;
         int entero1=0;
@@ -17,12 +27,14 @@ internal class Program
             Console.Clear();
             Console.WriteLine("Ingrese una opcion");
             Console.WriteLine("1-Registrar estudiantes");
-            Console.WriteLine("2-Registrar Quices");
-            Console.WriteLine("3-Registrar Parciales");
-            Console.WriteLine("4-Registrar Trabajos");
-            Console.WriteLine("5-Notas Generales");
-            Console.WriteLine("6-Notas Finales");
-            Console.WriteLine("7-Salir");
+            Console.WriteLine("2-Eliminar estudiantes");
+            Console.WriteLine("3-Registrar Quices");
+            Console.WriteLine("4-Registrar Parciales");
+            Console.WriteLine("5-Registrar Trabajos");
+            Console.WriteLine("6-Notas Generales");
+            Console.WriteLine("7-Notas Finales");
+            Console.WriteLine("8-Editar estudiantes");
+            Console.WriteLine("9-Salir");
             menu=byte.Parse(Console.ReadLine());
             switch (menu) {
                 case 1:
@@ -34,6 +46,17 @@ internal class Program
                     } while (AddStudents == "1");
                 break;
                 case 2:
+                    if (studentsList.Count > 0)
+                    {
+                        RemoveItem(studentsList);
+                    }
+                    else 
+                    {
+                        Console.WriteLine("No hay estudiantes por eliminar");
+                        Console.ReadLine();
+                    }
+                    break;
+                case 3:
                     if (studentsList.Count > 0) 
                     {
                         if (studentsList.Count > entero1) 
@@ -54,7 +77,7 @@ internal class Program
                         Console.ReadLine();
                     }
                     break;
-                case 3:
+                case 4:
                     if (studentsList.Count > 0) 
                     {
                         if (studentsList.Count > entero2) 
@@ -75,7 +98,7 @@ internal class Program
                         Console.ReadLine();
                     }
                     break;
-                case 4:
+                case 5:
                     if (studentsList.Count > 0) 
                     {
                         if (studentsList.Count > entero3) 
@@ -96,15 +119,19 @@ internal class Program
                         Console.ReadLine();
                     }
                     break;
-                case 5:
+                case 6:
                     Console.Clear();
                     printNotes(studentsList,entero1,entero2,entero3);
                     break;
-                case 6:
+                case 7:
                     Console.Clear();
                     printDefNotes(studentsList,entero1,entero2,entero3);
                     break;
-                case 7:
+                case 8:
+                    Console.Clear();
+                    Console.WriteLine("Adios...");
+                    break;
+                case 9:
                     Console.Clear();
                     Console.WriteLine("Adios...");
                     break;
@@ -114,7 +141,7 @@ internal class Program
                     Console.ReadLine(); 
                     break;
             }
-        } while (menu!=7);
+        } while (menu!=9);
     }
     public static string returnString(string texto, byte max)
     {   
@@ -148,7 +175,7 @@ internal class Program
         while ((!long.TryParse(dato, out number)) || (dato.Length > max) || (number<1))  
         {
             Console.Clear();
-            Console.WriteLine($"\n\n{texto} valido(a) para el estudiante");
+            Console.WriteLine($"\n\n{texto} invalido(a)\n\nIngrese otro");
             dato=Console.ReadLine();
         }
         return number;
@@ -256,12 +283,15 @@ internal class Program
             {
                 case "quiz":
                     studentsList[i].Quices.Add(littleDouble);
+                    SaveData(studentsList);
                     break;
                 case "parcial":
                     studentsList[i].Parciales.Add(littleDouble);
+                    SaveData(studentsList);
                     break;
                 case "trabajo":
                     studentsList[i].Trabajos.Add(littleDouble);
+                    SaveData(studentsList);
                     break;
             }
             contNotes+=littleDouble;
@@ -272,16 +302,19 @@ internal class Program
                 defNote=(contNotes/4)*0.25;
                 littleDouble=Math.Floor(defNote * factor) / factor;
                 studentsList[i].Quices.Add(littleDouble);
+                SaveData(studentsList);
                 break;
             case "parcial":
                 defNote=(contNotes/3)*0.60;
                 littleDouble=Math.Floor(defNote * factor) / factor;
                 studentsList[i].Parciales.Add(littleDouble);
+                SaveData(studentsList);
                 break;
             case "trabajo":
                 defNote=(contNotes/2)*0.15;
                 littleDouble=Math.Floor(defNote * factor) / factor;
                 studentsList[i].Trabajos.Add(littleDouble);
+                SaveData(studentsList);
                 break;
         }
     }
@@ -324,7 +357,7 @@ internal class Program
                         }
                         else 
                         {
-                            Console.WriteLine("Np es posible realizar esta accion");
+                            Console.WriteLine("No es posible realizar esta accion");
                         }
                     }
                 }
@@ -389,14 +422,27 @@ internal class Program
     }
 
     // Para cargar
-    // public static List<Estudiante> LoadData()
-    // {
-    //     using (StreamReader reader = new StreamReader('boletin.json'))
-    //     {
-    //         string json = reader.ReadToEnd();
-    //         return System.Text.Json.JsonSerializer
-    //         .Deserialize<List<Estudiante>>(json, new System.Text.Json.JsonSerializerOptions(){
-    //             PropertyNameCaseInsensitive = true }) ?? new <List<Estudiante>>();
-    //     }
-    // }
+    public static List<Estudiante> LoadData()
+    {
+        using (StreamReader reader = new StreamReader("boletin.json"))
+        {
+            string json = reader.ReadToEnd();
+            return System.Text.Json.JsonSerializer
+            .Deserialize<List<Estudiante>>(json, new System.Text.Json.JsonSerializerOptions()
+            { PropertyNameCaseInsensitive = true }) ?? new List<Estudiante>();
+        }
+    }
+    public static void RemoveItem(List<Estudiante> studentsList)
+    {
+        long longNumber;
+        longNumber=returnNumber("Codigo",15,studentsList);
+        Estudiante studentToRemove = studentsList.FirstOrDefault(x => x.Code.Equals(longNumber)) ?? new Estudiante();
+        if (studentToRemove != null)
+        {
+            Console.WriteLine($"El estudiante {studentToRemove.Nombre} fue eliminado con exito\n\nPresione enter para continuar");
+            Console.ReadLine();
+            studentsList.Remove(studentToRemove);
+            SaveData(studentsList);
+        }
+    }
 }
