@@ -589,32 +589,29 @@ internal class Program
                                     {
                                         Console.Clear();
                                         Console.WriteLine("Ingrese que el numero del dato que quiere editar");
-                                        Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
+                                        Console.WriteLine("\n1-Quices\n2-Trabajos\n3-Parciales\n4-Volver");
                                         dato=Console.ReadLine();
                                         switch (dato)
                                         {
+                                            // Para Quices
                                             case "1":
                                                 Console.Clear();
                                                 dato=returnString("Nombre",40);
                                                 studentsList[i].Nombre=dato;
                                                 SaveData(studentsList);
                                                 break;
+                                            // Para Parciales
                                             case "2":
                                                 Console.Clear();
                                                 dato=returnString("Email",40);
                                                 studentsList[i].Email=dato;
                                                 SaveData(studentsList);
                                                 break;
+                                            // Para Trabajos
                                             case "3":
                                                 Console.Clear();
                                                 number=returnNumber("Edad",3, studentsList);
                                                 studentsList[i].Edad=number;
-                                                SaveData(studentsList);
-                                                break;
-                                            case "4":
-                                                Console.Clear();
-                                                dato=returnString("Direccion",35);
-                                                studentsList[i].Direccion=dato;
                                                 SaveData(studentsList);
                                                 break;
                                             default:
