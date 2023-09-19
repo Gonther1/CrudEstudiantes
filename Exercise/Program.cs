@@ -512,55 +512,128 @@ internal class Program
             switch (menu)
             {
                 case 1:
-                    do 
+                    if (studentsList.Count > 0)
+                    {
+                        do 
+                        {
+                            Console.Clear();
+                            Flag=true;
+                            number=returnNumber("Codigo", 15, studentsList);
+                            for (byte i = 0; i < studentsList.Count; i++) 
+                            {
+                                if (number==studentsList[i].Code)
+                                {
+                                    do 
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Ingrese que el numero del dato que quiere editar");
+                                        Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
+                                        dato=Console.ReadLine();
+                                        switch (dato)
+                                        {
+                                            case "1":
+                                                Console.Clear();
+                                                dato=returnString("Nombre",40);
+                                                studentsList[i].Nombre=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "2":
+                                                Console.Clear();
+                                                dato=returnString("Email",40);
+                                                studentsList[i].Email=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "3":
+                                                Console.Clear();
+                                                number=returnNumber("Edad",3, studentsList);
+                                                studentsList[i].Edad=number;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "4":
+                                                Console.Clear();
+                                                dato=returnString("Direccion",35);
+                                                studentsList[i].Direccion=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    } while (dato != "5");
+                                }
+                            }
+                            Console.WriteLine("¿Quieres editar más estudiantes?");
+                            Console.WriteLine("Si=1          No=Cualquier tecla");
+                            dato=Console.ReadLine();
+                        } while (dato == "1");
+                    }
+                    else 
                     {
                         Console.Clear();
-                        Flag=true;
-                        number=returnNumber("Codigo", 15, studentsList);
-                        for (byte i = 0; i < studentsList.Count; i++) 
-                        {
-                            if (number==studentsList[i].Code)
-                            {
-                                do 
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("Ingrese que el numero del dato que quiere editar");
-                                    Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
-                                    dato=Console.ReadLine();
-                                    switch (dato)
-                                    {
-                                        case "1":
-                                            Console.Clear();
-                                            dato=returnString("Nombre",40);
-                                            studentsList[i].Nombre=dato;
-                                            break;
-                                        case "2":
-                                            Console.Clear();
-                                            dato=returnString("Email",40);
-                                            studentsList[i].Email=dato;
-                                            break;
-                                        case "3":
-                                            Console.Clear();
-                                            number=returnNumber("Edad",3, studentsList);
-                                            studentsList[i].Edad=number;
-                                            break;
-                                        case "4":
-                                            Console.Clear();
-                                            dato=returnString("Direccion",35);
-                                            studentsList[i].Direccion=dato;
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } while (dato != "5");
-                            }
-                        }
-                        Console.WriteLine("¿Quieres editar más estudiantes?");
-                        Console.WriteLine("Si=1          No=Cualquier tecla");
-                        dato=Console.ReadLine();
-                    } while (dato == "1");
+                        Console.WriteLine("No se puede realizar esta opcion\n\nPresione enter para continuar...");
+                        Console.ReadLine();
+                    }
                     break;
                 case 2:
+                    if (studentsList.Count > 0)
+                    {
+                        do 
+                        {
+                            Console.Clear();
+                            Flag=true;
+                            number=returnNumber("Codigo", 15, studentsList);
+                            for (byte i = 0; i < studentsList.Count; i++) 
+                            {
+                                if (number==studentsList[i].Code)
+                                {
+                                    do 
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Ingrese que el numero del dato que quiere editar");
+                                        Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
+                                        dato=Console.ReadLine();
+                                        switch (dato)
+                                        {
+                                            case "1":
+                                                Console.Clear();
+                                                dato=returnString("Nombre",40);
+                                                studentsList[i].Nombre=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "2":
+                                                Console.Clear();
+                                                dato=returnString("Email",40);
+                                                studentsList[i].Email=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "3":
+                                                Console.Clear();
+                                                number=returnNumber("Edad",3, studentsList);
+                                                studentsList[i].Edad=number;
+                                                SaveData(studentsList);
+                                                break;
+                                            case "4":
+                                                Console.Clear();
+                                                dato=returnString("Direccion",35);
+                                                studentsList[i].Direccion=dato;
+                                                SaveData(studentsList);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    } while (dato != "5");
+                                }
+                            }
+                            Console.WriteLine("¿Quieres editar más estudiantes?");
+                            Console.WriteLine("Si=1          No=Cualquier tecla");
+                            dato=Console.ReadLine();
+                        } while (dato == "1");
+                    }
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("No se puede realizar esta opcion\n\nPresione enter para continuar...");
+                        Console.ReadLine();
+                    }
                     break;
                 default:
                     Console.Clear();
