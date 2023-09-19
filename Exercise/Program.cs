@@ -7,10 +7,31 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        int entero1=0;
+        int entero2=0;
+        int entero3=0;
+        byte menu=0;
+        byte menuThree=0;
+        string AddStudents;
         List<Estudiante> studentsList = new List<Estudiante>();
         if (File.Exists("boletin.json"))
         {
             studentsList = LoadData();
+            for (int i = 0; i < studentsList.Count; i++)
+            {
+                if (studentsList[i].Quices.Count > 4)
+                {
+                    entero1+=1;
+                }
+                if (studentsList[i].Parciales.Count > 3)
+                {
+                    entero2+=1;
+                }
+                if (studentsList[i].Trabajos.Count > 2)
+                {
+                    entero3+=1;
+                }
+            }
         }
         else 
         {
@@ -18,23 +39,18 @@ internal class Program
             Console.ReadLine();
             SaveData(studentsList);
         }
-        byte menu=0;
-        string AddStudents;
-        int entero1=0;
-        int entero2=0;
-        int entero3=0;
         do {
             Console.Clear();
             Console.WriteLine("Ingrese una opcion");
             Console.WriteLine("1-Registrar estudiantes");
             Console.WriteLine("2-Eliminar estudiantes");
-            Console.WriteLine("3-Registrar Quices");
-            Console.WriteLine("4-Registrar Parciales");
-            Console.WriteLine("5-Registrar Trabajos");
-            Console.WriteLine("6-Notas Generales");
-            Console.WriteLine("7-Notas Finales");
-            Console.WriteLine("8-Editar estudiantes");
-            Console.WriteLine("9-Salir");
+            Console.WriteLine("3-Registrar notas");
+            Console.WriteLine("4-Editar informacion");
+            Console.WriteLine("5-Reportes e informes");
+/*
+            Console.WriteLine("5.1-Notas Generales");
+            Console.WriteLine("5.2-Notas Finales"); */
+            Console.WriteLine("6-Salir");
             menu=byte.Parse(Console.ReadLine());
             switch (menu) {
                 case 1:
@@ -46,92 +62,35 @@ internal class Program
                     } while (AddStudents == "1");
                 break;
                 case 2:
-                    if (studentsList.Count > 0)
+                    if (studentsList.Count > 0 && studentsList.Count<=entero1 && studentsList.Count<=entero2 && studentsList.Count<=entero3 )
                     {
                         RemoveItem(studentsList);
+                        entero1-=1;
+                        entero2-=1;
+                        entero3-=1;
                     }
                     else 
                     {
-                        Console.WriteLine("No hay estudiantes por eliminar");
+                        Console.Clear();
+                        Console.WriteLine("Para poder eliminar un estudiante debe registrar todos los estudiantes con sus respectivas notas\n\nPresione enter para continuar");
                         Console.ReadLine();
                     }
                     break;
                 case 3:
-                    if (studentsList.Count > 0) 
-                    {
-                        if (studentsList.Count > entero1) 
-                        {
-                            entero1=RegisterSubjects(studentsList,entero1,"quiz",3);
-                        }    
-                        else 
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Ya fueron registrados los quices de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
-                            Console.ReadLine();
-                        }                    
-                    } 
-                    else 
-                    {
-                        Console.Clear();
-                        Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
-                        Console.ReadLine();
-                    }
+                    Console.Clear();
+                    (entero1, entero2, entero3)=MenuNotas(studentsList, entero1, entero2, entero3);
                     break;
                 case 4:
-                    if (studentsList.Count > 0) 
-                    {
-                        if (studentsList.Count > entero2) 
-                        {
-                            entero2=RegisterSubjects(studentsList,entero2,"parcial",2);
-                        }    
-                        else 
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Ya fueron registrados los parciales de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
-                            Console.ReadLine();
-                        }                    
-                    } 
-                    else 
-                    {
-                        Console.Clear();
-                        Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
-                        Console.ReadLine();
-                    }
+                    Console.Clear();
+                    MenuEditarInfo(studentsList);
+/*                     Console.Clear();
+                    printNotes(studentsList,entero1,entero2,entero3); */
                     break;
                 case 5:
-                    if (studentsList.Count > 0) 
-                    {
-                        if (studentsList.Count > entero3) 
-                        {
-                            entero3=RegisterSubjects(studentsList,entero3,"trabajo",1);
-                        }    
-                        else 
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Ya fueron registrados los trabajos de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
-                            Console.ReadLine();
-                        }                    
-                    } 
-                    else 
-                    {
-                        Console.Clear();
-                        Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
-                        Console.ReadLine();
-                    }
+/*                     Console.Clear();
+                    printDefNotes(studentsList,entero1,entero2,entero3); */
                     break;
                 case 6:
-                    Console.Clear();
-                    printNotes(studentsList,entero1,entero2,entero3);
-                    break;
-                case 7:
-                    Console.Clear();
-                    printDefNotes(studentsList,entero1,entero2,entero3);
-                    break;
-                case 8:
-                    Console.Clear();
-                    Console.WriteLine("Adios...");
-                    break;
-                case 9:
                     Console.Clear();
                     Console.WriteLine("Adios...");
                     break;
@@ -141,7 +100,11 @@ internal class Program
                     Console.ReadLine(); 
                     break;
             }
-        } while (menu!=9);
+        } while (menu!=6);
+        Console.WriteLine(entero1);
+        Console.WriteLine(entero2);
+        Console.WriteLine(entero3);
+        Console.ReadLine();
     }
     public static string returnString(string texto, byte max)
     {   
@@ -348,12 +311,11 @@ internal class Program
                                 type=studentsList[i].Trabajos.Count;
                                 break;
                         }
-                        if (type <1 )
+                        if (type <1)
                         {
                             RegisterNotes(studentsList,option,range,i);
                             NumShort++;
                             Flag=false;
-                            Console.WriteLine(type);
                         }
                         else 
                         {
@@ -444,5 +406,148 @@ internal class Program
             studentsList.Remove(studentToRemove);
             SaveData(studentsList);
         }
+    }
+    public static (int, int, int) MenuNotas(List <Estudiante> studentsList, int entero1, int entero2, int entero3)
+    {
+        byte menuThree=0;
+        do 
+        {
+            Console.Clear();
+            Console.WriteLine("Ingrese una opcion");
+            Console.WriteLine("1-Registrar quices");
+            Console.WriteLine("2-Registrar parciales");
+            Console.WriteLine("3-Registrar trabajos");
+            Console.WriteLine("4-Volver");
+            menuThree=byte.Parse(Console.ReadLine());
+            switch (menuThree)
+            {
+            case 1:
+                if (studentsList.Count > 0) 
+                {
+                    if (studentsList.Count > entero1) 
+                    {
+                        entero1=RegisterSubjects(studentsList,entero1,"quiz",3);
+                    }    
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ya fueron registrados los quices de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                        Console.ReadLine();
+                    }                    
+                } 
+                else 
+                {
+                    Console.Clear();
+                    Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
+                    Console.ReadLine();
+                }
+                break;
+            case 2:
+                if (studentsList.Count > 0) 
+                {
+                    if (studentsList.Count > entero2) 
+                    {
+                        entero2=RegisterSubjects(studentsList,entero2,"parcial",2);
+                    }    
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ya fueron registrados los parciales de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                        Console.ReadLine();
+                    }                    
+                } 
+                else 
+                {
+                    Console.Clear();
+                    Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
+                    Console.ReadLine();
+                }
+                break;
+            case 3:
+                if (studentsList.Count > 0) 
+                {
+                    if (studentsList.Count > entero3) 
+                    {
+                        entero3=RegisterSubjects(studentsList,entero3,"trabajo",1);
+                    }    
+                    else 
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Ya fueron registrados los trabajos de todos los estudiantes\n\nRegistre más estudiantes para acceder a esta opcion\n\nPresione una tecla para continuar");
+                        Console.ReadLine();
+                    }                    
+                } 
+                else 
+                {
+                    Console.Clear();
+                    Console.WriteLine("No es posible realizar esta accion\n\nPresione enter para continuar");
+                    Console.ReadLine();
+                }
+                break;
+            case 4:
+                break;
+            default:
+                Console.Clear();
+                Console.WriteLine("Ingrese una opcion valida\n\nPresione enter para continuar...");
+                Console.ReadLine();
+                break;
+            }
+        } while (menuThree!=4);
+        return (entero1, entero2, entero3);
+    }
+    public static void MenuEditarInfo(List <Estudiante> studentsList)
+    {
+        byte menu=0;
+        long number=0;
+        string dato;
+        bool Flag;
+        do 
+        {
+            Console.Clear();
+            Console.WriteLine("Ingrese una opcion");
+            Console.WriteLine("1-Editar datos del estudiante");
+            Console.WriteLine("2-Editar notas del estudiante");
+            Console.WriteLine("3-Volver");
+            menu=byte.Parse(Console.ReadLine());
+            switch (menu)
+            {
+                case 1:
+                    do 
+                    {
+                        Console.Clear();
+                        Flag=true;
+                        number=returnNumber("Codigo", 15, studentsList);
+                        for (byte i = 0; i < studentsList.Count; i++) 
+                        {
+                            if (number==studentsList[i].Code)
+                            {
+                                do 
+                                {
+                                    Console.WriteLine("Ingrese que el numero del dato que quiere editar");
+                                    Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
+                                    dato=Console.ReadLine();
+                                    switch (dato)
+                                    {
+                                        case "1":
+                                            Console.WriteLine("XD");
+                                            break;
+                                    }
+                                } while (dato != "5");
+                            }
+                        }
+                        Console.WriteLine("¿Quieres editar más estudiantes?");
+                        Console.WriteLine("Si=1          No=Cualquier tecla");
+                        dato=Console.ReadLine();
+                    } while (dato == "1");
+                    break;
+                case 2:
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Ingrese una opcion valida");
+                    Console.ReadLine();
+                    break;
+            }
+        } while (menu!=3);
     }
 }
