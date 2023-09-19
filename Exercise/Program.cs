@@ -174,7 +174,7 @@ internal class Program
         estudents.Code=number;
         dato=returnString("Nombre",40);
         estudents.Nombre=dato;
-        dato=returnString("Correo",40);
+        dato=returnString("Email",40);
         estudents.Email=dato;
         number=returnNumber("Edad",3, studentsList);
         estudents.Edad=number;
@@ -523,13 +523,33 @@ internal class Program
                             {
                                 do 
                                 {
+                                    Console.Clear();
                                     Console.WriteLine("Ingrese que el numero del dato que quiere editar");
                                     Console.WriteLine("\n1-Nombre\n2-Email\n3-Edad\n4-Direccion\n5-Volver");
                                     dato=Console.ReadLine();
                                     switch (dato)
                                     {
                                         case "1":
-                                            Console.WriteLine("XD");
+                                            Console.Clear();
+                                            dato=returnString("Nombre",40);
+                                            studentsList[i].Nombre=dato;
+                                            break;
+                                        case "2":
+                                            Console.Clear();
+                                            dato=returnString("Email",40);
+                                            studentsList[i].Email=dato;
+                                            break;
+                                        case "3":
+                                            Console.Clear();
+                                            number=returnNumber("Edad",3, studentsList);
+                                            studentsList[i].Edad=number;
+                                            break;
+                                        case "4":
+                                            Console.Clear();
+                                            dato=returnString("Direccion",35);
+                                            studentsList[i].Direccion=dato;
+                                            break;
+                                        default:
                                             break;
                                     }
                                 } while (dato != "5");
