@@ -1,23 +1,53 @@
 [
   {
     "Code": 1,
-    "Nombre": "a",
-    "Email": "a",
-    "Edad": 1,
-    "Direccion": "a",
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Nombre": "Andres",
+    "Email": "luisandresalvarezsilva@gmail.com",
+    "Edad": 17,
+    "Direccion": "Calle 104 B # 16-29",
+    "Quices": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+    ],
+    "Trabajos": [
+      5.0,
+      5.0,
+      0.7
+    ],
+    "Parciales": [
+      1.0,
+      1.0,
+      1.0,
+      0.6
+    ]
   },
   {
     "Code": 2,
-    "Nombre": "a",
-    "Email": "a1",
-    "Edad": 1,
-    "Direccion": "a",
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Nombre": "Juanito",
+    "Email": "juanito123@gmail.com",
+    "Edad": 25,
+    "Direccion": "Porvenir",
+    "Quices": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+    ],
+    "Trabajos": [
+      5.0,
+      5.0,
+      0.7
+    ],
+    "Parciales": [
+      1.0,
+      1.0,
+      1.0,
+      0.6
+    ]
   },
   {
     "Code": 3,
@@ -25,8 +55,23 @@
     "Email": "a",
     "Edad": 1,
     "Direccion": "a",
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Quices": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+    ],
+    "Trabajos": [
+      1.0,
+      1.0,
+      0.1
+    ],
+    "Parciales": [
+      1.0,
+      1.0,
+      1.0,
+      0.6
+    ]
   }
 ]
