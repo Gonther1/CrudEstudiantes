@@ -498,7 +498,7 @@ public class MyFunctions
                                         {
                                             Console.Clear();
                                             Console.WriteLine("Ingrese el numero del dato que quiere editar");
-                                            Console.WriteLine("\n1-Quices\n2-Trabajos\n3-Parciales\n4-Volver");
+                                            Console.WriteLine("\n1-Quices\n2-Parciales\n3-Trabajos\n4-Volver");
                                             dato=Console.ReadLine();
                                             switch (dato)
                                             {
@@ -507,6 +507,7 @@ public class MyFunctions
                                                     if (entero1 > 0)
                                                     {
                                                         Console.Clear();
+                                                        studentsList[i].Quices.Clear();
                                                         RegisterNotes(studentsList,"quiz",3,i);
                                                     } 
                                                     else 
@@ -522,6 +523,7 @@ public class MyFunctions
                                                     if (entero2 > 0)
                                                     {
                                                         Console.Clear();
+                                                        studentsList[i].Parciales.Clear();
                                                         RegisterNotes(studentsList,"parcial",2,i);
                                                     } 
                                                     else 
@@ -537,6 +539,7 @@ public class MyFunctions
                                                     if (entero3 > 0)
                                                     {
                                                         Console.Clear();
+                                                        studentsList[i].Trabajos.Clear();
                                                         RegisterNotes(studentsList,"trabajo",1,i);
                                                     } 
                                                     else 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/CrudEstudiantes/Exercise/Exercise.csproj": {}
+    "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj": {}
   },
   "projects": {
-    "/workspaces/CrudEstudiantes/Exercise/Exercise.csproj": {
+    "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/CrudEstudiantes/Exercise/Exercise.csproj",
+        "projectUniqueName": "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj",
         "projectName": "Exercise",
-        "projectPath": "/workspaces/CrudEstudiantes/Exercise/Exercise.csproj",
-        "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/CrudEstudiantes/Exercise/obj/",
+        "projectPath": "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj",
+        "packagesPath": "C:\\Users\\APM02-54\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/codespace/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\APM02-54\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/dotnet/7.0.306/sdk/7.0.306/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
