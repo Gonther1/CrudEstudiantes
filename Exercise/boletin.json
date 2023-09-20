@@ -1,77 +1,12 @@
 [
   {
     "Code": 1,
-    "Nombre": "Andres",
-    "Email": "luisandresalvarezsilva@gmail.com",
-    "Edad": 17,
-    "Direccion": "Calle 104 B # 16-29",
-    "Quices": [
-      1.0,
-      1.0,
-      1.0,
-      1.0,
-      0.2
-    ],
-    "Trabajos": [
-      5.0,
-      5.0,
-      0.7
-    ],
-    "Parciales": [
-      1.0,
-      1.0,
-      1.0,
-      0.6
-    ]
-  },
-  {
-    "Code": 2,
-    "Nombre": "Juanito",
-    "Email": "juanito123@gmail.com",
-    "Edad": 25,
-    "Direccion": "Porvenir",
-    "Quices": [
-      1.0,
-      1.0,
-      1.0,
-      1.0,
-      0.2
-    ],
-    "Trabajos": [
-      5.0,
-      5.0,
-      0.7
-    ],
-    "Parciales": [
-      1.0,
-      1.0,
-      1.0,
-      0.6
-    ]
-  },
-  {
-    "Code": 3,
-    "Nombre": "Andres",
+    "Nombre": "a",
     "Email": "a",
     "Edad": 1,
-    "Direccion": "a",
-    "Quices": [
-      1.0,
-      1.0,
-      1.0,
-      1.0,
-      0.2
-    ],
-    "Trabajos": [
-      1.0,
-      1.0,
-      0.1
-    ],
-    "Parciales": [
-      1.0,
-      1.0,
-      1.0,
-      0.6
-    ]
+    "Direccion": "xd",
+    "Quices": [],
+    "Trabajos": [],
+    "Parciales": []
   }
 ]
