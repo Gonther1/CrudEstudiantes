@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "MhHUm91j4oV3vHSrEuEbzIR2s0LUiY1ayKG13Qtwv9HawT/Zj2zAqatz+unnXbRUNzaW5dN2wKZ0/Lfli86eRw==",
+  "dgSpecHash": "YwVJ2EkjqZ1+OhTfn3msQYZnAQHrIioz4YWZexy72Ctrf+OWwUrqQ0XqW1MsXbUhCLSEr22xNdsWyA/b5//3RA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\APM02-54\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Desktop\\CrudEstudiantes\\Exercise\\Exercise.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\APM02-54\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

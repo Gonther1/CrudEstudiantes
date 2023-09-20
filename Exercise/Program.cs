@@ -12,6 +12,7 @@ internal class Program
         int entero3=0;
         byte menu;
         string AddStudents;
+        string anotherMenu="";
         List<Estudiante> studentsList = new List<Estudiante>();
         if (File.Exists("boletin.json"))
         {
@@ -57,7 +58,7 @@ internal class Program
                         Console.WriteLine("Si=1          No=Cualquier tecla");
                         AddStudents=Console.ReadLine();
                     } while (AddStudents == "1");
-                break;
+                    break;
                 case 2:
                     if (studentsList.Count > 0 && studentsList.Count<=entero1 && studentsList.Count<=entero2 && studentsList.Count<=entero3 )
                     {
@@ -83,20 +84,40 @@ internal class Program
                         Console.WriteLine("Para poder eliminar un estudiante debe registrar todos los estudiantes con sus respectivas notas\n\nPresione enter para continuar");
                         Console.ReadLine();
                     }
-                    break;
+                        break;
                 case 3:
                     Console.Clear();
                     (entero1, entero2, entero3)=MyFunctions.MenuNotas(studentsList, entero1, entero2, entero3);
-                    break;
+                        break;
                 case 4:
                     Console.Clear();
                     MyFunctions.MenuEditarInfo(studentsList, entero1, entero2, entero3);
-                    break;
+                        break;
                 case 5:
-/*                     Console.Clear();
-                    printNotes(studentsList,entero1,entero2,entero3); */
-/*                     Console.Clear();
-                    printDefNotes(studentsList,entero1,entero2,entero3); */
+                    do {                        
+                        Console.Clear();
+                        Console.WriteLine("Ingrese una opcion");
+                        Console.WriteLine("1-Reporte notas");
+                        Console.WriteLine("2-Reporte definitivas");
+                        Console.WriteLine("3-Volver");
+                        anotherMenu=Console.ReadLine(); 
+                        switch (anotherMenu)
+                        {
+                            case "1":
+                                MyFunctions.printNotes(studentsList, entero1, entero2, entero3);
+                                break;
+                            case "2":
+                                MyFunctions.printDefNotes(studentsList, entero1, entero2, entero3);
+                                break;
+                            case "3":
+                                break; 
+                            default:
+                                Console.Clear();
+                                Console.WriteLine("Opcion invalida\n\nPresione enter para continuar");
+                                Console.ReadLine();
+                                break;                                    
+                        }                       
+                    } while (anotherMenu != "3");
                     break;
                 case 6:
                     Console.Clear();

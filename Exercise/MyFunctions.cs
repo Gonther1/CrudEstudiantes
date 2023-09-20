@@ -239,43 +239,7 @@ public class MyFunctions
             } while (dato=="1");
             return NumShort;
         }   
-        public static void printNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
-        {
-            if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
-            {
-                Console.Clear();
-                Console.WriteLine("---Codigo---Nombre---Quices---Trabajos---Parciales---");
-                for (byte i = 0; i < studentsList.Count; i++)
-                {
-                    Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--Q--{Math.Round(studentsList[i].Quices[0],1)}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]}---T---{studentsList[i].Trabajos[0]}--{studentsList[i].Trabajos[1]}---P---{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[1]}--{studentsList[i].Parciales[2]}");
-                }
-                
-                Console.ReadLine();
-            }
-            else 
-            {
-                Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
-                Console.Read();
-            }
-        }
-        public static void printDefNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
-        {
-            if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
-            {
-                Console.Clear();
-                Console.WriteLine("---Codigo---Nombre---Definitiva Quices---Definitiva Trabajos---Definitiva Parciales--");
-                for (byte i = 0; i < studentsList.Count; i++)
-                {
-                    Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}---{studentsList[i].Quices[4]}---{studentsList[i].Trabajos[2]}---{studentsList[i].Parciales[3]}");
-                }
-                Console.Read();
-            }
-            else 
-            {
-                Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
-                Console.Read();
-            }
-        }
+
         public static void SaveData(List<Estudiante> studentsList)
         {
             string json = JsonConvert.SerializeObject(studentsList,Formatting.Indented);
@@ -504,7 +468,7 @@ public class MyFunctions
                                             {
                                                 // Para Quices
                                                 case "1":
-                                                    if (entero1 > 0)
+                                                    if (studentsList.Count == entero1)
                                                     {
                                                         Console.Clear();
                                                         studentsList[i].Quices.Clear();
@@ -513,14 +477,14 @@ public class MyFunctions
                                                     else 
                                                     {
                                                         Console.Clear();
-                                                        Console.WriteLine("No se han registrado las notas de los quices de algun estudiante");
+                                                        Console.WriteLine("Primero debe registrar las notas de los quices de todos los estudiantes\n\nPresione enter para continaur...");
                                                         Console.ReadLine();
                                                     }
                                                     break;
                                                 // Para Parciales
                                                 case "2":
                                                     Console.Clear();
-                                                    if (entero2 > 0)
+                                                    if (studentsList.Count == entero2)
                                                     {
                                                         Console.Clear();
                                                         studentsList[i].Parciales.Clear();
@@ -529,14 +493,14 @@ public class MyFunctions
                                                     else 
                                                     {
                                                         Console.Clear();
-                                                        Console.WriteLine("No se han registrado las notas de los parciales de algun estudiante");
+                                                        Console.WriteLine("Primero debe registrar las notas de los parciales de todos los estudiantes\n\nPresione enter para continaur...");
                                                         Console.ReadLine();
                                                     }
                                                     break;
                                                 // Para Trabajos
                                                 case "3":
                                                     Console.Clear();
-                                                    if (entero3 > 0)
+                                                    if (studentsList.Count == entero3)
                                                     {
                                                         Console.Clear();
                                                         studentsList[i].Trabajos.Clear();
@@ -545,7 +509,7 @@ public class MyFunctions
                                                     else 
                                                     {
                                                         Console.Clear();
-                                                        Console.WriteLine("No se han registrado las notas de los trabajos de algun estudiante");
+                                                          Console.WriteLine("Primero debe registrar las notas de los trabajos de todos los estudiantes\n\nPresione enter para continaur...");
                                                         Console.ReadLine();
                                                     }
                                                     break;
@@ -578,5 +542,42 @@ public class MyFunctions
                         break;
                 }
             } while (menu!=3);
+        }
+        public static void printNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
+        {
+            if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
+            {
+                Console.Clear();
+                Console.WriteLine("---Codigo---Nombre---Quices---Trabajos---Parciales---");
+                for (byte i = 0; i < studentsList.Count; i++)
+                {
+                    Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}--Q--{Math.Round(studentsList[i].Quices[0],1)}--{studentsList[i].Quices[1]}--{studentsList[i].Quices[2]}--{studentsList[i].Quices[3]}---T---{studentsList[i].Trabajos[0]}--{studentsList[i].Trabajos[1]}---P---{studentsList[i].Parciales[0]}--{studentsList[i].Parciales[1]}--{studentsList[i].Parciales[2]}");
+                }
+                
+                Console.ReadLine();
+            }
+            else 
+            {
+                Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
+                Console.Read();
+            }
+        }
+        public static void printDefNotes(List<Estudiante> studentsList, int entero1, int entero2, int entero3)
+        {
+            if ((studentsList.Count > 0)&&(studentsList.Count == entero1)&&(studentsList.Count == entero2)&&(studentsList.Count == entero3))
+            {
+                Console.Clear();
+                Console.WriteLine("---Codigo---Nombre---Definitiva Quices---Definitiva Trabajos---Definitiva Parciales--");
+                for (byte i = 0; i < studentsList.Count; i++)
+                {
+                    Console.WriteLine($"---{studentsList[i].Code}---{studentsList[i].Nombre}---{studentsList[i].Quices[4]}---{studentsList[i].Trabajos[2]}---{studentsList[i].Parciales[3]}");
+                }
+                Console.Read();
+            }
+            else 
+            {
+                Console.WriteLine("No puedes realizar esta accion\n\nRevisa que hayas registrado estudiantes y que todos tengan todas las notas registradas\n\nPresione enter para continuar...");
+                Console.Read();
+            }
         }
 }
